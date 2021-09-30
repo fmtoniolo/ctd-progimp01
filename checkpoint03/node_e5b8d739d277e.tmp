@@ -1,0 +1,33 @@
+const aluno = require("./aluno");
+
+let aluno1 = new aluno.addAluno("Felipe", 5, [6.5, 7.2, 5.5, 8]);
+let aluno2 = new aluno.addAluno("José", 7, [4.8, 8.6, 7.1, 6.3]);
+let aluno3 = new aluno.addAluno("Joana", 0, [9.8, 8.6, 8.1, 9.3]);
+let aluno4 = new aluno.addAluno("Nazareth", 3, [3.4, 1, 10, 4.2]);
+let aluno5 = new aluno.addAluno("Carlos", 4, [8.4, 7, 7, 6,4]);
+
+let novoAluno1 = new aluno.addAluno("Glauber", 7, [6.5, 7.2, 5.5, 8]);
+let novoAluno2 = new aluno.addAluno("Claudiomiro", 5, [4.8, 8.6, 7.1, 6.3]);
+let novoAluno3 = new aluno.addAluno("Morgana", 3, [9.8, 8.6, 8.1, 9.3]);
+let novoAluno4 = new aluno.addAluno("Celeste", 0, [3.4, 1, 10, 4.2]);
+let novoAluno5 = new aluno.addAluno("Marcos", 2, [8.4, 7, 7, 6,4]);
+
+let listaAlunos = [aluno1, aluno2, aluno3, aluno4, aluno5];
+let listaNovosAlunos = [novoAluno1, novoAluno2, novoAluno3, novoAluno4, novoAluno5];
+
+function alunoNovo(){
+    while ((i = listaAlunos.shift()) != undefined ){
+    listaAlunos.push(listaNovosAlunos);
+    }
+    return listaAlunos;
+}
+
+let curso = {
+    nomeDoCurso: "CTD",
+    notaDeAprovacao: 7,
+    faltasMaximas: 10,
+    listaDeEstudantes: listaAlunos
+}
+
+alunoNovo();
+//console.log(listaAlunos);

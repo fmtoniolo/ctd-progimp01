@@ -1,12 +1,13 @@
-const aluno = require("./aluno");
+const bd = require("./aluno");
+let aprovados = [];
 
 let curso = {
   nomeDoCurso: "CTD",
   notaDeAprovacao: 7,
   faltasMaximas: 10,
-  listaDeEstudantes: aluno.listaAlunos,
+  listaDeEstudantes: bd.listaAlunos,
   adicionaAluno: function (nome, faltas, notas) {
-    let novoAluno = new aluno.aluno.Aluno(nome, faltas, notas);
+    let novoAluno = new bd.aluno(nome, faltas, notas);
     this.listaDeEstudantes.push(novoAluno);
     console.log(
       "Adicionado novo aluno: " + novoAluno.nome + ". Lista atualizada:"
@@ -17,30 +18,30 @@ let curso = {
     for (let i = 0; i < this.listaDeEstudantes.length; i++) {
       if (this.listaDeEstudantes[i].nome === nome) {
         if (
-          this.listaDeEstudantes[i].calcularMedia(nome) >=
+          this.listaDeEstudantes[i].calcularMedia() >=
             this.notaDeAprovacao &&
-          this.listaDeEstudantes[i].faltas < this.faltasMaximas
+          this.listaDeEstudantes[i].qtdFaltas < this.faltasMaximas
         ) {
+          aprovados.push(true);
           return true;
         } else if (
-          this.listaDeEstudantes[i].calcularMedia(nome) >=
+          this.listaDeEstudantes[i].calcularMedia() >=
             this.notaDeAprovacao * 1.1 &&
-          this.listaDeEstudantes[i].faltas == this.faltasMaximas
+          this.listaDeEstudantes[i].qtdFaltas == this.faltasMaximas
         ) {
+          aprovados.push(true);
           return true;
         } else {
+          aprovados.push(false)
           return false;
         }
-      } else return `Aluno ${nome} não encontrado.`;
+      } 
     }
+    return `Aluno ${nome} não encontrado.`;
   },
   listaAprovados: function () {
-    let aprovados = [];
-    for (apr of this.listaDeEstudantes) {
-      if (this.aprovado() == true) {
-        aprovados.push(true);
-      } else aprovados.push(false);
-    }
     return aprovados;
-  },
-};
+  }
+}
+console.log(curso.listaAprovados());
+//console.log(curso.listaDeEstudantes);
